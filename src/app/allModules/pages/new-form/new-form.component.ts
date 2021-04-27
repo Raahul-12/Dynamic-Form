@@ -716,6 +716,15 @@ export class NewFormComponent implements OnInit {
         break;
     }
   }
+
+
+
+
+
+
+
+
+  
   postdata() {
     this.spin = true;
     let abc: Q_Projects = new Q_Projects();
