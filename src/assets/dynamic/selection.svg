@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="_3527739" width="20.35" height="20.35" viewBox="0 0 20.35 20.35">
+    <defs>
+        <style>
+            .cls-1{fill:#0d0c22}
+        </style>
+    </defs>
+    <g id="Group_35">
+        <path id="Path_41" d="M8.055 20.35H1.272A1.273 1.273 0 0 1 0 19.078V1.272A1.273 1.273 0 0 1 1.272 0h6.783a1.273 1.273 0 0 1 1.272 1.272v17.806a1.273 1.273 0 0 1-1.272 1.272zM1.272.848a.424.424 0 0 0-.424.424v17.806a.424.424 0 0 0 .424.424h6.783a.424.424 0 0 0 .424-.424V1.272a.424.424 0 0 0-.424-.424z" class="cls-1"/>
+    </g>
+    <g id="Group_36" transform="translate(11.023)">
+        <path id="Path_42" d="M21.055 7.631h-6.783A1.273 1.273 0 0 1 13 6.359V1.272A1.273 1.273 0 0 1 14.272 0h6.783a1.273 1.273 0 0 1 1.272 1.272v5.087a1.273 1.273 0 0 1-1.272 1.272zM14.272.848a.424.424 0 0 0-.424.424v5.087a.424.424 0 0 0 .424.424h6.783a.424.424 0 0 0 .424-.424V1.272a.424.424 0 0 0-.424-.424z" class="cls-1" transform="translate(-13)"/>
+    </g>
+    <g id="Group_37" transform="translate(11.023 11.871)">
+        <path id="Path_43" d="M21.9 14.848h-8.476a.424.424 0 1 1 0-.848H21.9a.424.424 0 0 1 0 .848z" class="cls-1" transform="translate(-13 -14)"/>
+    </g>
+    <g id="Group_38" transform="translate(11.023 9.327)">
+        <path id="Path_44" d="M21.9 11.848h-8.476a.424.424 0 1 1 0-.848H21.9a.424.424 0 0 1 0 .848z" class="cls-1" transform="translate(-13 -11)"/>
+    </g>
+    <g id="Group_39" transform="translate(11.023 14.414)">
+        <path id="Path_45" d="M21.9 17.848h-8.476a.424.424 0 1 1 0-.848H21.9a.424.424 0 0 1 0 .848z" class="cls-1" transform="translate(-13 -17)"/>
+    </g>
+    <g id="Group_40" transform="translate(11.023 16.958)">
+        <path id="Path_46" d="M21.9 20.848h-8.476a.424.424 0 1 1 0-.848H21.9a.424.424 0 0 1 0 .848z" class="cls-1" transform="translate(-13 -20)"/>
+    </g>
+    <g id="Group_41" transform="translate(11.023 19.502)">
+        <path id="Path_47" d="M21.9 23.848h-8.476a.424.424 0 1 1 0-.848H21.9a.424.424 0 0 1 0 .848z" class="cls-1" transform="translate(-13 -23)"/>
+    </g>
+</svg>

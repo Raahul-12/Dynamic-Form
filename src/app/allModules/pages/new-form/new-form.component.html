@@ -1,0 +1,744 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div style="overflow: hidden;width: 100%;">
+    <mat-toolbar class="toolbar_alignment" fxLayout="row" fxLayout="row" fxLayoutAlign="space-between center">
+        <img src="../../assets/dynamic/logo.png" class="logo_image">
+        <div class="txt_dynamic" style="color:#254bf8;font-size: 15px;font-weight: 600;font-family: Poppins;"> Dynamic Form
+        </div>
+        <div>
+            <img src="../../assets/dynamic/logout_photo.jpg" class="logout_image">
+            <mat-icon class="dropdown_image">arrow_drop_down</mat-icon>
+        </div>
+
+    </mat-toolbar>
+
+    <div fxLayout="row" fxLayout="row" fxLayoutAlign="space-between center" style="border-bottom: none;">
+        <div fxLayout="row">
+            <mat-checkbox hidden="true" #selectAfterAdding> Select tab after adding </mat-checkbox>
+            <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)" (selectedTabChange)="TabClicked($event)">
+                <mat-tab *ngFor="let tab of tabs; let index = index" [label]="tab">
+                    <!-- Contents for  tab -->
+
+                    <!-- <button mat-raised-button class="example-delete-tab-button" [disabled]="tabs.length === 1" (click)="removeTab(index)">
+                Delete Tab
+              </button> -->
+                </mat-tab>
+            </mat-tab-group>
+
+            <button mat-raised-button class="btn_addnewForm" (click)="addTab(selectAfterAdding.checked)">
+                <span class="txt_new">+ New</span>
+            </button>
+            <!-- <mat-tab-group mat-align-tabs="start" style="width: 90%;margin-left: 30px;">
+            <mat-tab label="Page 1 "></mat-tab>
+            <mat-tab label="+ New"></mat-tab>
+
+
+        </mat-tab-group> -->
+        </div>
+        <div style="position:relative;right:20px;cursor: pointer;" (click)=preview()>
+            &nbsp;
+            <img src="../../assets/dynamic/preview.svg">&nbsp; <span class="txt_page1">Preview</span>
+        </div>
+    </div>
+    <mat-sidenav-container style="background-color: #f3f3f4;">
+
+        <mat-sidenav class="example-sidenav-container" mode="side" fxLayout="column" fxLayoutAlign="space-around center" opened style="background-color: #264dff;position: fixed;width: 15vh;
+        margin-top: 112px;height: 80vh;
+    border-radius: 3px;">
+            <!-- <div id="fab1" class="fabbox1"> -->
+            <img src="../../assets/dynamic/Add_icon.svg" style="position: absolute;top: 6%;left: 41.5%;width: 55px;">
+            <!-- </div> -->
+            <span class="txt_add">ADD</span>
+
+            <div style="background-color: white;width: 10vh;margin-left: 13px;margin-right: 10px;margin-top: 20px;">
+
+
+                <mat-nav-list fxLayout="column" fxLayoutAlign="space-around center">
+                    <img src="../../assets/dynamic/title.svg" class="txt_image" matTooltip="Title" matTooltipPosition="right" hover-class="image_hover" style="margin-top: 35px;">
+                    <img src="../../assets/dynamic/image.svg" class="txt_image" matTooltip="Image" matTooltipPosition="right" hover-class="image_hover">
+                    <img src="../../assets/dynamic/text.svg" class="txt_image" (click)="addSection(1)" matTooltip="Text" matTooltipPosition="right" hover-class="image_hover">
+                    <img src="../../assets/dynamic/choice.svg" class="txt_image" (click)="addSection(2)" matTooltip="Choice" matTooltipPosition="right" hover-class="image_hover">
+                    <img src="../../assets/dynamic/check_box.svg" class="txt_image" (click)="addSection(3)" matTooltip="Check Box" matTooltipPosition="right" hover-class="image_hover">
+                    <img src="../../assets/dynamic/timing.svg" class="txt_image" (click)="addSection(4)" matTooltip="Timing" matTooltipPosition="right" hover-class="image_hover">
+                    <img src="../../assets/dynamic/date.svg" class="txt_image" (click)="addSection(5)" matTooltip="Date" matTooltipPosition="right" hover-class="image_hover">
+                    <img src="../../assets/dynamic/attachment.svg" class="txt_image" (click)="addSection(6)" matTooltip="Attachment" matTooltipPosition="right" hover-class="image_hover">
+                    <img src="../../assets/dynamic/rating.svg" class="txt_image" (click)="addSection(7)" matTooltip="Rating" matTooltipPosition="right" hover-class="image_hover">
+                    <img src="../../assets/dynamic/net_promter_score.svg" class="txt_image" (click)="addSection(8)" matTooltip="Net Promter Score" matTooltipPosition="right" hover-class="image_hover">
+                    <img src="../../assets/dynamic/table.svg" class="txt_image" (click)="addSection(9)" matTooltip="Table" matTooltipPosition="right" hover-class="image_hover">
+                    <img src="../../assets/dynamic/likert.svg" class="txt_image" (click)="addSection(9)" matTooltip="Likert" matTooltipPosition="right" hover-class="image_hover">
+                    <img src="../../assets/dynamic/selection.svg" class="txt_image" matTooltip="Selection" matTooltipPosition="right" hover-class="image_hover">
+                </mat-nav-list>
+            </div>
+        </mat-sidenav>
+        <mat-sidenav-content style="background-color:#f3f3f4;" class="overallDiv">
+            <form [formGroup]="AllForm">
+                <div style="height: 79vh;overflow-y: scroll;" class="overallDiv">
+                    <mat-card style="margin: 20px;margin-left:90px;margin-right:90px;box-shadow: none;" class="flex">
+                        <div>
+                            <!-- Header section -->
+                            <div class="border_box" fxLayout="row" fxLayoutAlign="space-between center">
+                                <!-- <mat-form-field style="width:100%"> -->
+                                <input style="margin-top: 10%;" matInput class="txt_heading" formControlName="Header" placeholder="Header Text">
+                                <!-- </mat-form-field> -->
+                                <input type="file" accept="image/*" #fileInput style="display: none;" (change)="handleFileInput($event)">
+                                <div fxLayout="row" fxLayoutAlign="space-evenly center" class="drop_container_header" ngFileDrop (uploadOutput)="onUploadOutput($event)">
+                                    <div *ngIf="flagupload" fxLayout="row" fxLayoutAlign="space-around center">
+
+
+                                        <div style="text-align: center;" class="txt_drag">{{filename}}</div>
+                                        <div *ngIf="flagupload">
+                                            <img src="../../assets/dynamic/sign-delete-icon.png" class="removeicon_header" (click)="remove() ">
+                                        </div>
+                                    </div>
+                                    <div fxLayout="column" fxLayoutAlign="space-around center">
+                                        <span *ngIf="!flagupload" class="txt_drag" style="position: relative;bottom: 6px;">
+                                            Drag and drop or</span>
+                                        <div class="btn_addimage" (click)="fileInput.click()">
+                                            <span class="txt_addimage">Add Image</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- Images Common Name -->
+                            <div style="margin-top: 20px;">
+                                <span class="txt_imagescommonname">Images Common Name</span>
+                                <div style="background-color:#f3f3f4;height: 10rem;">
+                                    <input type="file" accept="image/*" #commonnamefileInput style="display: none;" (change)="commonnameFileInput($event)">
+                                    <div class="drop_container_commonname" fxLayout="row" fxLayoutAlign="space-around center" ngFileDrop (uploadOutput)="commonnameUploadOutput($event)">
+                                        <div *ngIf="commonflagupload" fxLayout="row" fxLayout="space-around center">
+                                            <img [src]="Headerurl" width="80px" height="80px">
+                                            <div *ngIf="commonflagupload">
+                                                <img src="../../assets/dynamic/sign-delete-icon.png" class="removeicon_imagescomman" (click)="commonnameremove() ">
+                                            </div>
+                                        </div>
+                                        <div fxLayout="column" fxLayoutAlign="space-around center">
+                                            <span *ngIf="!commonflagupload" class="txt_drag_commanname"> Drag and drop
+                                                or</span>
+                                            <div class="btn_addimage_commanimage" (click)="commonnamefileInput.click()">
+                                                <span class="txt_addimage">Add Image</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Description -->
+
+                            <div style="margin-top: 20px;">
+                                <span class="txt_imagescommonname">Description</span>
+                                <div style="background-color:#f3f3f4;height: 6rem;margin-top: 7px;">
+                                    <input type="file" accept="image/*" #descriptionfileInput style="display: none;" (change)="descriptionFileInput($event)">
+                                    <div fxLayout="row" fxLayoutAlign="space-between center">
+
+                                        <!-- <span class="txt_attachment">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span> -->
+                                        <input class="txt_attachment" placeholder="Question" formControlName="Description">
+                                        <div fxLayout="row" fxLayoutAlign="space-evenly center" class="drop_container_description" ngFileDrop (uploadOutput)="DescriptionUploadOutput($event)">
+                                            <div *ngIf="descriptionflagupload" fxLayout="row" fxLayoutAlign="space-around center">
+                                                <div style="text-align: center;" class="txt_drag">
+                                                    {{descriptionfilename}}
+                                                </div>
+                                                <div *ngIf="descriptionflagupload">
+                                                    <img src="../../assets/dynamic/sign-delete-icon.png" class="removeicon_header" (click)="descremove() ">
+                                                </div>
+                                            </div>
+                                            <div fxLayout="column" fxLayoutAlign="space-around center">
+
+                                                <div class="btn_addimage" (click)="descriptionfileInput.click()">
+                                                    <span class="txt_addimage">Add Image</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Table name -->
+                            <div formArrayName="Tabel" style="margin-top: 20px;">
+                                <div *ngFor="let section of getSection(AllForm,'Tabel'); let i = index" [formGroupName]='i'>
+                                    <span class="txt_imagescommonname">{{i+1}} Table Name</span>
+                                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="box-shadow: none;border: 1px solid #f3f3f3;margin-top: 7px;">
+
+
+
+
+                                        <ng-container *ngFor="let column of columnsToDisplay1;let i=index">
+                                            <ng-container *ngIf="column!='addicon'" [matColumnDef]="column">
+                                                <th style="background-color: #f3f3f3;" mat-header-cell *matHeaderCellDef>
+                                                    <div class="txt_table"> {{column}} </div>
+                                                </th>
+                                                <td mat-cell *matCellDef="let row">
+                                                    {{row[column]}}
+                                                </td>
+                                            </ng-container>
+                                        </ng-container>
+                                        <ng-container matColumnDef="addicon">
+                                            <th mat-header-cell *matHeaderCellDef style="background-color: #f3f3f3;">
+                                                <div id="fab" class="fabbox">
+                                                    <img (click)="addColumn_table()" src="../../assets/dynamic/add.png" style="width:16px;cursor: pointer;">
+                                                </div>
+                                            </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.addicon}} </td>
+                                        </ng-container>
+
+                                        <tr mat-header-row *matHeaderRowDef="columnsToDisplay1"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: columnsToDisplay1;"></tr>
+                                    </table>
+                                    <div class="border_plusrow">
+                                        <div id="fab" class="fabbox" style="position: relative;left: 50%;margin-top: 10px;">
+                                            <img (click)="addrow_tabel()" src="../../assets/dynamic/add.png" style="width:16px;cursor: pointer;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- </mat-card> -->
+                        <!-- <mat-card style="margin: 20px;margin-left:90px;margin-right:90px;box-shadow: none;" class="flex"> -->
+
+                        <!-- choice -->
+                        <!-- <div formArrayName="Choice">
+                            <div *ngFor="let section of getSection(AllForm,'Choice'); let i = index" [formGroupName]="i" style="margin-top: 20px;">
+                                <span class="txt_imagescommonname">{{i+1}} Choice</span>
+                                <div style="background-color:#f3f3f4;height: 4rem;margin-top: 7px;">
+                                    <input type="file" accept="image/*" #choicefileInput style="display: none;" (change)="choiceFileInput($event)">
+                                    <div fxLayout="row" fxLayoutAlign="space-between center">
+
+                                        <input class="txt_attachment" value="Question" formControlName="Question">
+
+
+
+                                        <div fxLayout="row" fxLayoutAlign="space-evenly center" class="drop_container_description" ngFileDrop (uploadOutput)="choiceUploadOutput($event)">
+                                            <div *ngIf="choiceflagupload" fxLayout="row" fxLayoutAlign="space-around center">
+                                                <div style="text-align: center;" class="txt_drag">{{choicefilename}}
+                                                </div>
+                                                <div *ngIf="choiceflagupload">
+                                                    <img src="../../assets/dynamic/sign-delete-icon.png" class="removeicon_header" (click)="choiceremove() ">
+                                                </div>
+                                            </div>
+                                            <div fxLayout="column" fxLayoutAlign="space-around center">
+                                                <div class="btn_addimage" (click)="choicefileInput.click()">
+                                                    <span class="txt_addimage">Add Image</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div formArrayName="Options">
+                                    <div *ngFor="let d of getSection(section,'Options');let k = index;">
+
+
+                                        <div [formGroupName]="k" fxLayoutAlign="row" class="form-check" style="margin-top: 10px;">
+
+                                            <div *ngIf="!isChoiceMulitiple" class="form-check">
+
+                                                <input  class="form-check-input"  style="margin-top: 14px;"  type="radio"    id="exampleRadios1"  value="option1"  >
+                                            </div>
+                                            <div *ngIf="isChoiceMulitiple" class="form-check">
+                                                <input class="form-check-input" type="checkbox" style="margin-top: 14px;" value="" id="defaultCheck1">
+                                            </div>
+
+
+                                            <div style="display: flex;gap: 10px;">
+                                                <input autocomplete="off" class="form-control" formControlName="Title" style="width: 90%;" placeholder="Add Option" />
+
+                                            </div>
+                                            <mat-icon (click)="RemoveItem('Choice',i,k)" *ngIf="k!=0">delete_outline
+                                            </mat-icon>
+                                            <div id="fab" *ngIf="k==0" class="fabbox" (click)="addoption(i,'Choice')">
+                                                <img src="../../assets/dynamic/add.png" style="width:16px;cursor: pointer;">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div fxLayout="row" fxLayoutAlign="space-between center" style="margin-left: 15px;margin-top: 20px;">
+                                    <div fxLayout="row" fxLayoutGap="10px">
+                                        <div class="custom-control custom-switch">
+                                            <input (click)="MultipleAnswer()" type="checkbox" class="custom-control-input" id="customSwitch1">
+                                            <label class="custom-control-label txt_attachment" style=" background-color: #ffffff;" for="customSwitch1">Multiple
+                                                Answers</label>
+                                        </div>
+
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                                            <label class="custom-control-label txt_attachment" style=" background-color: #ffffff;">Required
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button class="txt_more_heading" style="height: 30px;" mat-button [matMenuTriggerFor]="menu">More ...</button>
+                                        <mat-menu #menu="matMenu">
+                                            <div mat-menu-item style="color: #ffffff;">
+                                                <input type="checkbox" value="Shuffle"> Shuffle Options
+                                            </div>
+                                            <div mat-menu-item style="color: #ffffff;">
+                                                <input type="checkbox" value="Dropdown"> Drop Down
+                                            </div>
+                                            <div mat-menu-item style="color: #ffffff;">
+                                                <input type="checkbox" value="SubTitle"> Sub-Title
+                                            </div>
+                                        </mat-menu>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <!-- checkbox -->
+                        <div formArrayName="Check">
+                            <div *ngFor="let section of getSection(AllForm,'Check');let i = index;" [formGroupName]="i" style="margin-top: 20px;">
+                                <span class="txt_imagescommonname">{{i+1}} Check Box</span>
+                                <div style="background-color:#f3f3f4;height: 6rem;margin-top: 7px;">
+                                    <input type="file" accept="image/*" #checkboxfileInput style="display: none;" (change)="checkboxFileInput($event)">
+                                    <div fxLayout="row" fxLayoutAlign="space-between center">
+
+
+                                        <input class="txt_attachment" placeholder="Question" formControlName="Question">
+                                        <div fxLayout="row" fxLayoutAlign="space-evenly center" class="drop_container_description" ngFileDrop (uploadOutput)="checkboxUploadOutput($event)">
+                                            <div *ngIf="checkboxflagupload" fxLayout="row" fxLayoutAlign="space-around center">
+
+
+                                                <div style="text-align: center;" class="txt_drag">{{checkboxfilename}}
+                                                </div>
+                                                <div *ngIf="checkboxflagupload">
+                                                    <img src="../../assets/dynamic/sign-delete-icon.png" class="removeicon_header" (click)="checkboxremove() ">
+                                                </div>
+                                            </div>
+                                            <div fxLayout="column" fxLayoutAlign="space-around center">
+
+                                                <div class="btn_addimage" (click)="checkboxfileInput.click()">
+                                                    <span class="txt_addimage">Add Image</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div formArrayName="Options">
+                                    <div *ngFor="let d of getSection(section,'Options');let k = index;" class="form-check" style="margin-top: 20px;margin-left: 20px;">
+                                        <div [formGroupName]="k" style="    display: flex;
+                                        gap: 15px;">
+
+                                            <input class="form-check-input" type="checkbox" style="margin-top: 14px;" value="" id="defaultCheck1" disabled>
+                                            <div style="display: flex;gap: 10px;">
+                                                <input formControlName="Title" class="form-control" style="width: 70%;" placeholder="Add Option" />
+                                                <mat-icon (click)="RemoveItem('Check',i,k)" *ngIf="k!=0">
+                                                    delete_outline</mat-icon>
+
+
+                                                <div *ngIf="k==0" id="fab" class="fabbox">
+                                                    <img (click)="addoption(i,'Check')" src="../../assets/dynamic/add.png" style="width:16px;cursor: pointer;">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="custom-control custom-switch" style="margin-top: 15px;">
+                                    <input type="checkbox" class="custom-control-input" name="customSwitch2" (change)="onChange($event)">
+                                    <label class="custom-control-label txt_attachment" style=" background-color: #ffffff;" for="customSwitch2">Required
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- Date -->
+
+                        <div formArrayName="Date">
+                            <div *ngFor="let section of getSection(AllForm,'Date');let i = index;" [formGroupName]="i" style="margin-top: 20px;">
+                                <span class="txt_imagescommonname">{{i+1}} Date</span>
+                                <div style="background-color:#f3f3f4;height: 6rem;margin-top: 7px;">
+                                    <input type="file" accept="image/*" #datefileInput style="display: none;" (change)="dateFileInput($event)">
+                                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                                        <!-- <span class="txt_attachment">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span> -->
+                                        <input class="txt_attachment" value="Question" formControlName="Question">
+                                        <div fxLayout="row" fxLayoutAlign="space-evenly center" class="drop_container_description" ngFileDrop (uploadOutput)="dateUploadOutput($event)">
+                                            <div *ngIf="dateflagupload" fxLayout="row" fxLayoutAlign="space-around center">
+                                                <div style="text-align: center;" class="txt_drag">{{datefilename}}</div>
+                                                <div *ngIf="dateflagupload">
+                                                    <img src="../../assets/dynamic/sign-delete-icon.png" class="removeicon_header" (click)="dateremove() ">
+                                                </div>
+                                            </div>
+                                            <div fxLayout="column" fxLayoutAlign="space-around center">
+
+                                                <div class="btn_addimage" (click)="datefileInput.click()">
+                                                    <span class="txt_addimage">Add Image</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div formArrayName="Options" *ngFor="let d of getSection(section,'Options');let k = index;">
+                                    <div fxLayout="row" style="margin-top: 10px;margin-left: 20px;" [formGroupName]="k" fxLayoutGap="40px">
+
+                                        <mat-form-field appearance="fill">
+                                            <mat-label>Choose a date</mat-label>
+                                            <input matInput [matDatepicker]="picker" formControlName="Title">
+                                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                            <mat-datepicker #picker></mat-datepicker>
+                                        </mat-form-field>
+                                        <mat-icon (click)="RemoveItem('Date',i,k)" *ngIf="k!=0">
+                                            delete_outline</mat-icon>
+
+                                        <div fxLayout="row" *ngIf="k==0" (click)="addoption(i,'Date')" fxLayoutAlign="space-around center">
+                                            <mat-icon>date_range</mat-icon>&nbsp;
+                                            <span class="txt_adddate">Add&nbsp;Date</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch3">
+                                    <label class="custom-control-label txt_attachment" style=" background-color: #ffffff;" for="customSwitch2">Required
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Time -->
+                        <div formArrayName="Time">
+                            <div *ngFor="let section of getSection(AllForm,'Time');let i = index;" [formGroupName]="i" style="margin-top: 20px;">
+                                <span class="txt_imagescommonname">{{i+1}} Time</span>
+                                <div style="background-color:#f3f3f4;height: 6rem;margin-top: 7px;">
+                                    <input type="file" accept="image/*" #timefileInput style="display: none;" (change)="timeFileInput($event)">
+                                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                                        <!-- <span class="txt_attachment">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span> -->
+                                        <input class="txt_attachment" value="Question" formControlName="Question">
+                                        <div fxLayout="row" fxLayoutAlign="space-evenly center" class="drop_container_description" ngFileDrop (uploadOutput)="timeUploadOutput($event)">
+                                            <div *ngIf="timeflagupload" fxLayout="row" fxLayoutAlign="space-around center">
+                                                <div style="text-align: center;" class="txt_drag">{{timefilename}}</div>
+                                                <div *ngIf="timeflagupload">
+                                                    <img src="../../assets/dynamic/sign-delete-icon.png" class="removeicon_header" (click)="timeremove() ">
+                                                </div>
+                                            </div>
+                                            <div fxLayout="column" fxLayoutAlign="space-around center">
+
+                                                <div class="btn_addimage" (click)="timefileInput.click()">
+                                                    <span class="txt_addimage">Add Image</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div formArrayName="Options">
+
+                                    <div *ngFor="let d of getSection(section,'Options');let k = index;" [formGroupName]="k" fxLayout="row" style="margin-top: 10px;margin-left: 20px;" fxLayoutGap="40px">
+                                        <mat-form-field appearance="fill" style="margin-left: 30px;margin-top: 20px;width: 24.4%;">
+                                            <mat-label>Time</mat-label>
+                                            <input matInput formControlName="Title" type="datetime-local">
+                                        </mat-form-field>
+                                        <mat-icon (click)="RemoveItem('Time',i,k)" style="line-height: 2.5;" *ngIf="k!=0">delete_outline</mat-icon>
+                                        <div fxLayout="row" *ngIf="k==0" (click)="addoption(i,'Time')" fxLayoutAlign="space-between center">
+                                            <mat-icon>date_range</mat-icon>&nbsp;
+                                            <span class="txt_adddate">Add&nbsp;Time</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch4">
+                                    <label class="custom-control-label txt_attachment" style=" background-color: #ffffff;" for="customSwitch2">Required
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Attachment -->
+
+                        <div formArrayName="Attachment">
+                            <div *ngFor="let section of getSection(AllForm,'Attachment');let i = index;" [formGroupName]="i" style="margin-top: 20px">
+                                <span class="txt_imagescommonname">{{i+1}} Attachments</span>
+
+                                <div style="background-color:#f3f3f4;margin-top: 7px;">
+                                    <input type="file" accept="image/*" #attachmentfileInput style="display: none;" (change)="attachmentFileInput($event)">
+                                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                                        <!-- <span class="txt_attachment">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span> -->
+                                        <input class="txt_attachment" value="Question">
+                                        <div fxLayout="row" fxLayoutAlign="space-evenly center" class="drop_container_description" ngFileDrop (uploadOutput)="attachmentUploadOutput($event)">
+                                            <div *ngIf="attachmentflagupload" fxLayout="row" fxLayoutAlign="space-around center">
+                                                <div style="text-align: center;" class="txt_drag">{{attachmentfilename}}
+                                                </div>
+                                                <div *ngIf="attachmentflagupload">
+                                                    <img src="../../assets/dynamic/sign-delete-icon.png" class="removeicon_header" (click)="attachmentremove() ">
+                                                </div>
+                                            </div>
+                                            <div fxLayout="column" fxLayoutAlign="space-around center">
+
+                                                <div class="btn_addimage" (click)="attachmentfileInput.click()">
+                                                    <span class="txt_addimage">Add Image</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div fxLayout="row" fxLayoutAlign="space-evenly center" class="drop_container_attachment" ngFileDrop (uploadOutput)="attach2UploadOutput($event)">
+                                    <input type="file" accept="image/*" #attach2fileInput style="display: none;" (change)="attach2FileInput($event)">
+                                    <div *ngIf="attach2flagupload" fxLayout="row" fxLayoutAlign="space-around center">
+                                        <div style="text-align: center;" class="txt_drag">{{attach2filename}}</div>
+                                        <div *ngIf="attach2flagupload">
+                                            <img src="../../assets/dynamic/sign-delete-icon.png" class="removeicon_header" (click)="attach2remove() ">
+                                        </div>
+                                    </div>
+                                    <div fxLayout="column" fxLayoutAlign="space-around center">
+
+                                        <div class="btn_addimage" (click)="attach2fileInput.click()">
+                                            <span class="txt_addimage">Add Image</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ratings -->
+
+                        <div formArrayName="Rating">
+                            <div *ngFor="let section of getSection(AllForm,'Rating');let i = index;" [formGroupName]="i" style="margin-top: 20px;">
+                                <span class="txt_imagescommonname">{{i+1}} Ratings</span>
+                                <div style="background-color:#f3f3f4;height: 6rem;margin-top: 7px;">
+                                    <input type="file" accept="image/*" #ratingsfileInput style="display: none;" (change)="ratingsFileInput($event)">
+                                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                                        <!-- <span class="txt_attachment">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span> -->
+                                        <input class="txt_attachment" value="Question" formControlName="Question">
+                                        <div fxLayout="row" fxLayoutAlign="space-evenly center" class="drop_container_description" ngFileDrop (uploadOutput)="ratingsUploadOutput($event)">
+                                            <div *ngIf="ratingsflagupload" fxLayout="row" fxLayoutAlign="space-around center">
+
+
+                                                <div style="text-align: center;" class="txt_drag">{{ratingsfilename}}
+                                                </div>
+                                                <div *ngIf="ratingsflagupload">
+                                                    <img src="../../assets/dynamic/sign-delete-icon.png" class="removeicon_header" (click)="ratingsremove() ">
+                                                </div>
+                                            </div>
+                                            <div fxLayout="column" fxLayoutAlign="space-around center">
+
+                                                <div class="btn_addimage" (click)="ratingsfileInput.click()">
+                                                    <span class="txt_addimage">Add Image</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div formArrayName="Options">
+                                    <div *ngFor="let d of getSection(section,'Options');let k = index;" [formGroupName]="k">
+                                        <div fxLayout="row" fxLayoutGap="10px" style="margin-top: 10px;margin-left: 20px;">
+                                            <span class="txt_q1">Q{{k+1}}</span>
+                                            <input class="form-control" style="width: 30%;" />
+                                            <mat-icon (click)="RemoveItem('Rating',i,k)" style="line-height: 1.5;" *ngIf="k!=0">delete_outline</mat-icon>
+                                            <div *ngIf="k==0" id="fab" class="fabbox" (click)="addoption(i,'Rating')">
+                                                <img src="../../assets/dynamic/add.png" style="width:16px;cursor: pointer;">
+                                            </div>
+                                        </div>
+                                        <div style="margin-left: 40px;margin-top: 10px;">
+                                            <ngx-stars [readonly]="true" [maxStars]="5" [initialStars]="4" [color]="'gold'"></ngx-stars>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch5">
+                                    <label class="custom-control-label txt_attachment" style=" background-color: #ffffff;" for="customSwitch2">Required
+                                    </label>
+                                </div>
+                                <!-- <div fxLayout="row" fxLayoutGap="10px" style="margin-top: 10px;margin-left: 20px;">
+                            <span class="txt_q1">Q2</span>
+                            <input class="form-control" style="width: 30%;" />
+                           
+                        </div> -->
+                            </div>
+                        </div>
+                        <!-- </mat-card> -->
+
+                        <!-- <mat-card style="margin: 20px;margin-left:90px;margin-right:90px;box-shadow: none;"> -->
+                        <!-- Net Promoter Score -->
+                        <div formArrayName="Score" style="margin-top: 30px;">
+                            <div *ngFor="let section of getSection(AllForm,'Score');let i = index;" [formGroupName]="i">
+                                <span class="txt_imagescommonname">{{i+1}} Net Promoter Score</span>
+                                <div style="background-color:#f3f3f4;height: 6rem;margin-top: 7px;">
+                                    <input type="file" accept="image/*" #netpromofileInput style="display: none;" (change)="netpromoFileInput($event)">
+                                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                                        <!-- <span class="txt_attachment">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span> -->
+                                        <input class="txt_attachment" value="Question" formControlName="Question">
+                                        <div fxLayout="row" fxLayoutAlign="space-evenly center" class="drop_container_description" ngFileDrop (uploadOutput)="netpromoUploadOutput($event)">
+                                            <div *ngIf="netpromoflagupload" fxLayout="row" fxLayoutAlign="space-around center">
+
+
+                                                <div style="text-align: center;" class="txt_drag">{{netpromofilename}}
+                                                </div>
+                                                <div *ngIf="netpromoflagupload">
+                                                    <img src="../../assets/dynamic/sign-delete-icon.png" class="removeicon_header" (click)="netpromoremove() ">
+                                                </div>
+                                            </div>
+                                            <div fxLayout="column" fxLayoutAlign="space-around center">
+
+                                                <div class="btn_addimage" (click)="netpromofileInput.click()">
+                                                    <span class="txt_addimage">Add Image</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div formArrayName="Options">
+
+                                    <div *ngFor="let d of getSection(section,'Options');let k = index;" [formGroupName]="k">
+                                        <div fxLayout="row" fxLayoutGap="10px" style="margin-top: 10px;margin-left: 20px;">
+                                            <span class="txt_q1">Q{{k+1}}</span>
+                                            <input class="form-control" formControlName="Title" style="width: 30%;">
+                                            <mat-icon (click)="RemoveItem('Score',i,k)" style="line-height: 1.5;" *ngIf="k!=0">delete_outline</mat-icon>
+                                            <div id="fab" *ngIf="k==0" class="fabbox" (click)="addoption(i,'Score')">
+                                                <img src="../../assets/dynamic/add.png" style="width:16px;cursor: pointer;">
+                                            </div>
+                                        </div>
+                                        <div style="margin-left: 40px;margin-top: 10px;" fxLayout="row" fxLayoutGap="10px">
+                                            <div class="box_netprompter_score">
+                                                <span class="netbox_inside">1</span>
+                                            </div>
+                                            <div class="box_netprompter_score">
+                                                <span class="netbox_inside">2</span>
+                                            </div>
+                                            <div class="box_netprompter_score">
+                                                <span class="netbox_inside">3</span>
+                                            </div>
+                                            <div class="box_netprompter_score">
+                                                <span class="netbox_inside">4</span>
+                                            </div>
+                                            <div class="box_netprompter_score">
+                                                <span class="netbox_inside">5</span>
+                                            </div>
+                                            <div class="box_netprompter_score">
+                                                <span class="netbox_inside">6</span>
+                                            </div>
+                                            <div class="box_netprompter_score">
+                                                <span class="netbox_inside">7</span>
+                                            </div>
+                                            <div class="box_netprompter_score">
+                                                <span class="netbox_inside">8</span>
+                                            </div>
+                                            <div class="box_netprompter_score">
+                                                <span class="netbox_inside">9</span>
+                                            </div>
+                                            <div class="box_netprompter_score">
+                                                <span class="netbox_inside">10</span>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch6">
+                                    <label class="txt_attachment" style=" background-color: #ffffff;" for="customSwitch2">Required
+                                    </label>
+                                </div>
+                                <!-- <div fxLayout="row" fxLayoutGap="10px" style="margin-top: 10px;margin-left: 20px;">
+                            <span class="txt_q1">Q2</span>
+                            <input class="form-control" style="width: 30%;" />
+                            <div id="fab" class="fabbox">
+                                <img src="../../assets/dynamic/add.png" style="width:16px;cursor: pointer;">
+                            </div>
+                        </div> -->
+                            </div>
+                        </div>
+                        <!-- Likert -->
+                        <div formArrayName="Likert">
+                            <div *ngFor="let section of getSection(AllForm,'Likert');let i = index;" [formGroupName]="i" style="margin-top: 20px;">
+                                <span class="txt_imagescommonname">{{i+1}} Likert</span>
+                                <div style="background-color:#f3f3f4;height: 6rem;margin-top: 7px;">
+                                    <input type="file" accept="image/*" #likertfileInput style="display: none;" (change)="likertFileInput($event)">
+                                    <div fxLayout="row" fxLayoutAlign="space-between center">
+                                        <!-- <span class="txt_attachment">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span> -->
+                                        <input class="txt_attachment" value="Question" formControlName="Question">
+
+                                        <div fxLayout="row" fxLayoutAlign="space-evenly center" class="drop_container_description" ngFileDrop (uploadOutput)="likertUploadOutput($event)">
+                                            <div *ngIf="likertflagupload" fxLayout="row" fxLayoutAlign="space-around center">
+                                                <div style="text-align: center;" class="txt_drag">{{likertfilename}}
+                                                </div>
+                                                <div *ngIf="likertflagupload">
+                                                    <img src="../../assets/dynamic/sign-delete-icon.png" class="removeicon_header" (click)="likertremove() ">
+                                                </div>
+                                            </div>
+                                            <div fxLayout="column" fxLayoutAlign="space-around center">
+
+                                                <div class="btn_addimage" (click)="likertfileInput.click()">
+                                                    <span class="txt_addimage">Add Image</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <table mat-table [dataSource]="likertdataSource" class="mat-elevation-z8" style="box-shadow: none;border: 1px solid #f3f3f3;margin-top: 30px;">
+
+
+
+
+                                    <ng-container *ngFor="let column of columnsToDisplay;let i=index">
+                                        <ng-container *ngIf="column!='addicon'" [matColumnDef]="column">
+                                            <th style="background-color: #f3f3f3;" mat-header-cell *matHeaderCellDef>
+                                                <div class="txt_table"> {{column}} </div>
+                                            </th>
+                                            <td mat-cell *matCellDef="let row">
+                                                <div class="txt_table" *ngIf="column=='name'" style="line-height: 5.91;">
+                                                    {{row[column]}}</div>
+
+                                                <div class="form-check">
+
+                                                    <input *ngIf="column!='name'" class="form-check-input"  style="position: relative;"  type="radio"  name="exampleRadios"  id="exampleRadios1"  value="option1"  >
+                            </div>
+                            </td>
+                            </ng-container>
+                            </ng-container>
+
+                            <ng-container matColumnDef="addicon">
+                                <th mat-header-cell *matHeaderCellDef style="background-color: #f3f3f3;">
+                                    <div id="fab" class="fabbox">
+                                        <img (click)="AddColumn_likert()" src="../../assets/dynamic/add.png" style="width:16px;cursor: pointer;">
+                                    </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element"> {{element.addicon}} </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+                            <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+                            </table>
+                            <div class="border_plusrow">
+                                <div id="fab" class="fabbox" style="position: relative;left: 50%;margin-top: 10px;">
+                                    <img src="../../assets/dynamic/add.png" (click)="addRow_likert()" style="width:16px;cursor: pointer;">
+                                </div>
+                            </div>
+
+
+                        </div>
+                </div>
+                </mat-card>
+
+</div>
+<mat-spinner style="position: absolute;top: 50%;left: 50%;" *ngIf="spin"></mat-spinner>
+<div (click)="postdata()" class="btn_addimage" style="margin: auto;text-align: center;width: 26%;">
+    <span class="txt_addimage">Save</span>
+</div>
+
+</form>
+</mat-sidenav-content>
+</mat-sidenav-container>
+
+</div>

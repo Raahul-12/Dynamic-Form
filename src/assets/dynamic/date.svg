@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="_833595" width="20" height="20" viewBox="0 0 20 20">
+    <defs>
+        <style>
+            .cls-1{fill:#0d0c22}
+        </style>
+    </defs>
+    <g id="Group_11">
+        <g id="Group_10">
+            <path id="Path_16" d="M279 280.771a1.736 1.736 0 0 0 1.734 1.734h2.037a1.736 1.736 0 0 0 1.734-1.734v-2.037a1.736 1.736 0 0 0-1.734-1.734h-2.037a1.736 1.736 0 0 0-1.734 1.734zm1.734-2.037h2.037v2.037h-2.038z" class="cls-1" transform="translate(-268.145 -267.201)"/>
+            <circle id="Ellipse_321" cx="1" cy="1" r="1" class="cls-1" transform="translate(13.304 6.899)"/>
+            <circle id="Ellipse_322" cx="1" cy="1" r="1" class="cls-1" transform="translate(9.855 6.899)"/>
+            <path id="Path_17" d="M19.219 13.75a.781.781 0 0 0 .781-.781V4.688a3.129 3.129 0 0 0-3.125-3.125h-1.016V.781a.781.781 0 1 0-1.562 0v.781h-3.555V.781a.781.781 0 1 0-1.563 0v.781H5.664V.781a.781.781 0 0 0-1.564 0v.781h-.975A3.129 3.129 0 0 0 0 4.688v12.187A3.129 3.129 0 0 0 3.125 20h13.75A3.129 3.129 0 0 0 20 16.875a.781.781 0 0 0-1.562 0 1.564 1.564 0 0 1-1.563 1.563H3.125a1.564 1.564 0 0 1-1.563-1.563V4.688a1.564 1.564 0 0 1 1.563-1.563H4.1v.781a.781.781 0 1 0 1.563 0v-.781H9.18v.781a.781.781 0 1 0 1.563 0v-.781H14.3v.781a.781.781 0 1 0 1.563 0v-.781h1.016a1.564 1.564 0 0 1 1.563 1.563v8.281a.781.781 0 0 0 .777.781z" class="cls-1"/>
+            <circle id="Ellipse_323" cx="1" cy="1" r="1" class="cls-1" transform="translate(3.942 13.304)"/>
+            <circle id="Ellipse_324" cx="1" cy="1" r="1" class="cls-1" transform="translate(3.942 6.899)"/>
+            <circle id="Ellipse_325" cx="1" cy="1" r="1" class="cls-1" transform="translate(3.942 9.855)"/>
+            <circle id="Ellipse_326" cx="1" cy="1" r="1" class="cls-1" transform="translate(6.899 9.855)"/>
+            <circle id="Ellipse_327" cx="1" cy="1" r="1" class="cls-1" transform="translate(6.899 6.899)"/>
+            <circle id="Ellipse_328" cx="1" cy="1" r="1" class="cls-1" transform="translate(6.899 13.304)"/>
+        </g>
+    </g>
+</svg>

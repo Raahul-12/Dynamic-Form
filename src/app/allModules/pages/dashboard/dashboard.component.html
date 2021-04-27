@@ -1,0 +1,135 @@
+<!-- <div id="dashboard" class="page-layout carded" fusePerfectScrollbar>
+  <div class="center" fxLayout="column" fxLayoutGap="10px">
+
+    <mat-card class="p-8 pt-4 pb-0 m-0">
+      <div fxLayout>
+        <div fxFlex fxLayoutAlign="start center" class="h2">
+          <b>Dashboard</b>
+        </div>
+      </div>
+    </mat-card>
+    <div class="sidenav-content mt-4">
+     
+    </div>
+  </div>
+  <mat-progress-spinner *ngIf="isProgressBarVisibile" class="progressBarPostion" color="accent" mode="indeterminate">
+  </mat-progress-spinner>
+  <div id="overlay" *ngIf="isProgressBarVisibile"></div>
+</div> -->
+<div style="width: 100%;" class="BG" fxLayout="column" fxLayoutGap="20px">
+    <mat-toolbar class="toolbar_alignment" fxLayout="row" fxLayoutAlign="space-between center">
+        <img src="../../assets/dynamic/logo.png" class="logo_image">
+        <div class="txt_dynamic" style="color:#254bf8;font-size: 15px;font-weight: 600;font-family: Poppins;"> Dynamic Form</div>
+        <div>
+            <img src="../../assets/dynamic/logout_photo.jpg" class="logout_image">
+            <mat-icon class="dropdown_image">arrow_drop_down</mat-icon>
+        </div>
+
+    </mat-toolbar>
+
+    <!-- <div class="sample">
+        <img src="../../assets/dynamic/img2.svg" class="imgg11" style="height: 250px;">
+    </div> -->
+
+    <div fxLayout="row" fxLayoutGap="50px" fxFlexOffset="2">
+        <div fxLayout="column" fxFlex="30" fxLayoutGap="15px" style="cursor: pointer;">
+            <div fxLayout="row">
+                <div fxFlex="30"></div>
+                <div><span class="draft">Create New</span></div>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="end end">
+                <div class="info1" fxLayout="column" (click)="createnew()">
+                    <div style="height: 50px;"></div>
+                    <div fxLayout="row" style="width: 100%;">
+                        <div fxFlex="40"></div>
+                        <div id="fab" class="fabbox">
+                            <mat-icon class="add">add</mat-icon>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div fxLayout="column" fxFlex="70" fxLayoutGap="15px">
+            <div fxLayout="row">
+
+                <div><span class="draft">Draft File</span></div>
+            </div>
+
+            <div fxLayout="row">
+                <div class="info2" fxLayout="column" fxFlexOffset="5" style="width: 100%;padding: 10px;">
+
+                    <div fxFlex="70"></div>
+                    <div fxLayout="row" style="width: 85%;">
+                        <div fxLayout="column" fxFlex="50 ">
+                            <span class="parking">Parking</span>
+                            <span class="upd_date">2 days ago</span>
+                        </div>
+                        <div fxLayout="row" fxFlex="2">
+                            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                            <mat-menu #menu="matMenu">
+                                <div fxLayout="column">
+                                    <span class="menu">Open</span>
+                                    <span class="menu">Rename</span>
+                                    <span class="menu">Delete</span>
+                                </div>
+
+
+                            </mat-menu>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div fxLayout="column" fxFlex="100" fxLayoutGap="15px" class="new">
+        <div fxLayout="row">
+
+            <div><span class="draft">Saved File</span></div>
+        </div>
+
+        <div fxLayout="row">
+            <div class="info3" fxLayout="column" fxFlexOffset="5" style="padding: 10px;">
+                <div fxFlex="70"></div>
+                <div fxLayout="row" style="width: 85%;">
+                    <div fxLayout="column" fxFlex="82 ">
+                        <span class="parking">Parking</span>
+                        <span class="upd_date">2 days ago</span>
+                    </div>
+                    <div fxLayout="row" fxFlex="2">
+                        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                        <mat-menu #menu="matMenu">
+                            <div fxLayout="column">
+                                <span class="menu">Open</span>
+                                <span class="menu">Rename</span>
+                                <span class="menu">Delete</span>
+                            </div>
+
+
+                        </mat-menu>
+                    </div>
+                </div>
+                <!-- <div style="height: 50px;"></div>
+                <div fxLayout="row" style="width: 100%;">
+                    <div fxFlex="40"></div>
+                    <div id="fab" class="fabbox">
+                        <mat-icon>add</mat-icon> -->
+
+            </div>
+
+        </div>
+        <!-- <div fxLayout="row" fxLayoutAlign="end center"> -->
+        <!-- <div fxLayout="column" fxFlex="58"></div> -->
+        <!-- <img src="../../assets/dynamic/img2.svg" class="imgg11"> -->
+        <!-- </div> -->
+    </div>
+
+
+</div>
+<!-- </div> -->
