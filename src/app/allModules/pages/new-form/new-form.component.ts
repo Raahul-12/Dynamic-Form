@@ -100,6 +100,8 @@ export class NewFormComponent implements OnInit {
   isChoiceMulitiple: boolean = false;
   AllForm: FormGroup;
   questiongrp: AddQuestionGroup[] = [];
+
+  
   Q_Project: Q_Projects[] = [];
   questiongrpmap: AddQ_project_GroupMap[] = [];
   questions: Question[] = [];
