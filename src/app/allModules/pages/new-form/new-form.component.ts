@@ -679,6 +679,10 @@ export class NewFormComponent implements OnInit {
         break;
     }
   }
+
+
+
+  
   ratingsUploadOutput(output: UploadOutput): void {
     switch (output.type) {
       case 'allAddedToQueue':
