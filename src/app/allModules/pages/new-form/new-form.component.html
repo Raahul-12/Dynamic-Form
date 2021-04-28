@@ -464,6 +464,7 @@
                             <div *ngFor="let section of getSection(AllForm,'Attachment');let i = index;" [formGroupName]="i" style="margin-top: 20px">
                                 <span class="txt_imagescommonname">{{i+1}} Attachments</span>
 
+
                                 <div style="background-color:#f3f3f4;margin-top: 7px;">
                                     <input type="file" accept="image/*" #attachmentfileInput style="display: none;" (change)="attachmentFileInput($event)">
                                     <div fxLayout="row" fxLayoutAlign="space-between center">
